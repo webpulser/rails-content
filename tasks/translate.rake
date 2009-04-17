@@ -31,6 +31,28 @@ namespace :rails_content do
     end
   end
   
+  desc "Move the translation table to the original table"
+  task (:untranslate => :environment) do
+    I18n.locale = ENV['locale']
+    
+    models = ENV['model'].split(',')
+    models.each do |model|
+      table = Class.class_eval model
+      
+      table_translation = Class.new(super_class=ActiveRecord::Base) do
+        self.table_name = "#{table.table_name.singularize}_translations"
+      end
+      table_translation.find_by_locale(:fr).each do |entry|      
+        object_table = table.first entry.method("#{table.table_name.singularize}_id").call
+        columns = {} 
+        table_translation.columns.reject{ |column| ['id','locale',table.table_name.singularize+"_id"].include?(column.name) }.each do |column| 
+          columns[column.name.to_sym] = entry.method(column.name).call
+        end
+        object_table.update_attributes(columns)
+      end
+    end
+  end
+  
   desc "Import a yml file into the database"
   task (:import_yml => :environment) do
     I18n.valid_locales.each do |locale|

@@ -72,6 +72,7 @@ fr:
   create: 'créer'
   new: 'créer'
   none: 'aucun'
+  language: 'langue'
   pictures: 'images'
   attributes_groups: "groupes d'attributs"
   attributes: 'attributs'
@@ -99,6 +100,7 @@ fr:
   show: 'voir'
   back: 'retour'
   title: 'titre'
+  key: 'clé'
   content: 'contenu'
   footer: 'pied-de-page'
   page_content: 'contenu de la page'
@@ -136,6 +138,17 @@ fr:
   dynamic: 'dynamic'
   linked_pages: 'pages liées'
   block_style: 'style du bloc'
+  translate: 'traduire'
+  translation:
+    one: 'traduction'
+    other: 'traductions'
+    list: 'liste des traductions'
+    untranslated:
+      action: 'non traduits'
+    update:
+      action: 'traduire'
+      success: 'le mot clé a bien été traduit'
+      failed: 'un problème est survenu lors de la modification du mot clé'
   block:
     one: "bloc"
     other: "blocs"
@@ -297,6 +310,7 @@ fr:
   account: 'compte'
   sections: 'sections'
   pages: 'pages'
+  translations: 'traductions'
   blocks: 'blocs'
   logout: 'déconnexion'
 

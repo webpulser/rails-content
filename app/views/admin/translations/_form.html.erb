@@ -1,0 +1,22 @@
+<% form_tag :action => :update do |f| %>
+  <table>
+    <th><%= I18n.t("key").capitalize %></th>
+    <th><%= I18n.t("translation", :count => 1).capitalize + image_tag("flags/#{@default_locale}_flag.png", :alt => " flag #{@default_locale}") %></th>
+	<th><%= I18n.t("reference").capitalize + image_tag("flags/#{@locale_reference}_flag.png", :alt => " flag #{@locale_reference}") %></th>
+	<th><%= I18n.t("submit").capitalize %></th>
+    <% @translations.each do |translation| %>
+	  <tr>
+		<td><%= translation.key %></td>
+		<% I18n.locale = @default_locale %>
+	    <td><%= text_field_tag "translation[#{translation.id}]", translation.translation %></td>
+		<% if @locale_reference %>
+		  <% I18n.locale = @locale_reference %>
+		  <td><%= I18n.t(translation.key) %></td>
+		<% end %>
+		<% I18n.locale= @default_locale %>
+		<td><%= link_to_function I18n.t("translate").capitalize, "translate_keyword( #{translation.id}, #{@default_locale}, translation[#{translation.id}] )" %>
+	  </tr>
+	<% end %>
+  </table>
+<%= submit_tag I18n.t("translate").capitalize %></td>
+<% end %>

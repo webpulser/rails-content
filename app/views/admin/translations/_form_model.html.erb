@@ -1,0 +1,69 @@
+<%= include_tiny_mce_if_needed %>
+
+<% 
+fields_reference = []
+fields_translated = []
+translate_fields.each do |field|
+#  fields_reference << "#{translated_model} #{field.name}"
+  fields_translated << "#{translated_model} #{field.name}"	
+end
+%>
+
+<% form_for translated_model, object, :url => { :controller => controller, :action => action, :locale => locale, :id => object.id } do |f| %>
+<table>
+  <th><%= I18n.t("key").capitalize %></th>
+  <th>
+	<%= image_tag("flags/#{locale_translated}_flag.png", :alt => " flag #{locale_translated}") %>
+	<%= I18n.t('translation.one').capitalize + " " + locale_translated.to_s %>
+	<br/>
+	<% locales_translated.each do |translated| %>
+	  <%= link_to_function image_tag("flags/#{translated}_flag.png", :alt => " flag #{translated}"), "set_translated('#{translated}', [#{fields_translated.join ', '}])" %>
+	<% end %>
+  </th>
+  <% if !locales_reference.empty? %>
+	<th>
+	  <%= image_tag("flags/#{locale_reference}_flag.png", :alt => " flag #{locale_reference}") %>
+	  <%= I18n.t('reference').capitalize + " " + locale_reference.to_s if locale_reference %>
+	  <br/>
+	  <% locales_reference.each do |reference| %>
+	    <%= link_to_function image_tag("flags/#{reference}_flag.png", :alt => "flag #{reference}"), "set_reference('#{reference}', [#{fields_reference.join ', '}])" %>
+	  <% end %>
+	</th>
+  <% end %>
+  <% translate_fields.each do |field| %>
+  <tr>
+	<% I18n.locale = locale_translated %>
+	<td><label><%= I18n.t(field.name).capitalize %></label></td>
+	
+	<% if locale_reference %>	  
+	  <td>
+	    <% I18n.locale = locale_translated %>
+	  	<% if field.type == :string %>
+		  <%= f.text_field field.name %>
+		<% elsif field.type == :text %>
+	      <%= f.text_area field.name, :rows => 8, :columns => 30 %>
+		  <%= link_to_function I18n.t('editor.show.action'), "toggleEditor('#{translated_model}_content',this)" %>
+		<% end %>
+	  </td>
+   	  <td>
+		
+	    <% I18n.locale = locale_reference %>
+		<%= object.method(field.name).call %>
+	  </td>
+	<% else %>
+	  <td>
+	    <% I18n.locale = locale_translated %>
+	    <% if field.type == :string %>
+          <%= f.text_field field.name %>
+	    <% elsif field.type == :text %>
+	      <%= f.text_area field.name, :rows => 8, :columns => 30 %>
+		  <%= link_to_function I18n.t('editor.show.action'), "toggleEditor('#{translated_model}_content',this)" %>
+	    <% end %>
+	  </td>
+	<% end %>
+    </tr>
+  <% end %>
+  </table>
+  <%= f.submit I18n.t("translate").capitalize %>
+<% end %>
+<% I18n.locale = locale%>

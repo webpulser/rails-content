@@ -72,6 +72,7 @@ en:
   create: 'create'
   new: 'new'
   none: 'none'
+  language: 'language'
   pictures: 'pictures'
   attributes_groups: 'attributes groups'
   attributes: 'attributes'
@@ -99,6 +100,7 @@ en:
   show: 'show'
   back: 'back'
   title: 'title'
+  key: 'key'
   content: 'content'
   footer: 'footer'
   page_content: 'page content'
@@ -136,6 +138,17 @@ en:
   dynamic: 'dynamic'
   linked_pages: 'linked pages'
   block_style: 'block style'
+  translate: 'translate'
+  translation:
+    one: 'translation'
+    other: 'translations'
+    list: 'list of translations'
+    untranslated:
+      action: 'untranslated'
+    update:
+      action: 'translate keywords'
+      success: 'the keyword has successfully been translated'
+      failed: 'a problem occured during the keyword translation'
   block:
     one: 'block'
     other: 'blocks'
@@ -297,6 +310,7 @@ en:
   account: 'account'
   sections: 'sections'
   pages: 'pages'
+  translations: 'translations'
   blocks: 'blocks'
   logout: 'logout'
 

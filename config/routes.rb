@@ -16,7 +16,11 @@ namespace :admin do |admin|
   admin.resources :admins
   admin.resources :roles
   admin.resources :rights
-
+  admin.resources :translations
+  
+  connect 'admin/*model/untranslated', :controller => 'admin/translations', :action => 'list_untranslated'
+  connect 'admin/*model/translate/:id', :controller => 'admin/translations', :action => 'edit_dynamic'
+  connect 'admin/*model/update_translation/:id', :controller => 'admin/translations', :action => 'update_dynamic'
   connect ':controller/:action/:id'
 end
 

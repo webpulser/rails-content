@@ -1,0 +1,5 @@
+<% @content_for_tools << link_to(I18n.t('list').capitalize, { :action => 'index' }, :class => 'house' ) %>
+
+<% if :translation %>
+  <% @content_for_tools << link_to(I18n.t('translation.untranslated.action').capitalize, { :action => 'list_untranslated' }) %>
+<% end %>

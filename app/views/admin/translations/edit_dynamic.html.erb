@@ -1,0 +1,12 @@
+<h1><%= I18n.t(@model.name.downcase, :count =>1).capitalize + " - " + I18n.t('translation.update.action') %></h1>
+<%= render :partial => 'form_model', :locals => { :controller => params[:model],
+												  :translated_model => @model.name,
+	 											  :action => 'update_translation', 
+												  :object => @object,
+												  :locale => I18n.locale,
+												  :locale_reference => @locale_reference,
+												  :locales_reference => @locales_reference,
+												  :locale_translated => @locale_translated,
+												  :locales_translated => @locales_translated,
+												  :translate_fields => @translate_fields }
+%>

@@ -49,6 +49,10 @@ $.fn.droppy = function(options) {
         $('> a', li).addClass('hover');
       }
     }
+
+	function translate_keywords(id, translation){
+  		
+	}
     
     $('ul, li', this).hover(show, hide);
     $('li', this).hover(

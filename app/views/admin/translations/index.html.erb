@@ -1,0 +1,18 @@
+<%= render :partial => 'top_links', :locals => { :translation => @translation } %>
+
+<h1><%= I18n.t('translation.list').capitalize %></h1>
+<table>
+  <th><%= I18n.t('key').capitalize %></th>
+  <% @available_locales.each do |locale| %>
+	<th><%= locale %></th>
+  <% end %>
+  <% @translations.each do |translation| %>
+    <tr>
+	  <td><%= translation.key %></td>
+	  <% @available_locales.each do |locale| %>
+	    <% I18n.locale= locale %>
+		<td><%= I18n.t(translation.key) %></td>
+	  <% end %>
+	</tr>
+  <% end %>
+</table>

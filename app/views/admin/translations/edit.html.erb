@@ -1,0 +1,2 @@
+<h1><%= "#{I18n.t('translation.update.action').capitalize} in #{@default_locale.to_s}" + (@locale_reference ? " (#{I18n.t('reference')} : #{@locale_reference.to_s})" : '') %></h1>
+<%= render :partial => 'form' %>

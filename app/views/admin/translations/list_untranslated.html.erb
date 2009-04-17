@@ -1,0 +1,24 @@
+<h1><%= "#{I18n.t(@model.name.downcase, :count => 2).capitalize} #{I18n.t('translation.untranslated.action')}" %></h1>
+<table>
+  <th><%= I18n.t('language').capitalize %></th>
+  <th><%= I18n.t('title').capitalize %></th>
+  <% if @model.instance_methods.include? "title"
+	   field = 'title'
+	 elsif @model.instance_methods.include? "name"
+	   field = 'name'
+     end %>
+  <% @untranslated.each do |untranslated| %>
+    <% I18n.valid_locales.each do |locale| %>
+  	<tr>
+	  <% I18n.locale=locale %>
+	  <% title = untranslated.method(field).call %>
+	  <% if title %>
+	    <td><%= image_tag("flags/#{I18n.locale}_flag.png", :alt => " flag #{I18n.locale}")%></td>
+        <td><%= link_to title, :action => :translate, :id => untranslated %></td>
+	    <% break %>
+	  <%end%>
+	</tr>
+	<% end %>
+  <% end %>
+</table>
+<% I18n.locale = @default_locale %>
